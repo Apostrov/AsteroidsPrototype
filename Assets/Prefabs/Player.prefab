@@ -129,6 +129,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93574be9f8ecc9947b91fd30a5512659, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ToMove: {fileID: 9135057246147499123}
+  ToRotate: {fileID: 9135057246147499123}
 --- !u!1 &9135057246281900086
 GameObject:
   m_ObjectHideFlags: 0
