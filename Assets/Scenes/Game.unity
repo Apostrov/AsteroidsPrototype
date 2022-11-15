@@ -236,7 +236,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf08eae7eb844e27b190e408ae158326, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Player: {fileID: 1551497417}
+  PlayerMover: {fileID: 1551497417}
   InputBinder: {fileID: 1740963398}
   MovementConfig: {fileID: 11400000, guid: a7b27515a2bfae9499c6830d603cb4dd, type: 2}
 --- !u!4 &731899776

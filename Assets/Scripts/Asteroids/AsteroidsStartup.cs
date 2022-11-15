@@ -1,14 +1,14 @@
-﻿using Asteroids.Input;
+﻿using Asteroids.Data;
+using Asteroids.Input;
 using Asteroids.Move;
-using Asteroids.Move.Data;
 using Asteroids.Player;
 using UnityEngine;
 
 namespace Asteroids
 {
-    public class AppStartup : MonoBehaviour
+    public class AsteroidsStartup : MonoBehaviour
     {
-        [SerializeField] private PlayerView Player;
+        [SerializeField] private PlayerMover PlayerMover;
         
         [Header("Input and movements")]
         [SerializeField] private PlayerInputEventManager InputBinder;
@@ -16,7 +16,7 @@ namespace Asteroids
 
         private void Awake()
         {
-            var inputEventListener = new InputEventListener(MovementConfig, new IMovable[] { Player });
+            var inputEventListener = new MovePlayerInputListener(MovementConfig, new IMovable[] { PlayerMover });
             InputBinder.SubscribeToMoveVectorChange(inputEventListener.UpdateMoveInput);
         }
     }

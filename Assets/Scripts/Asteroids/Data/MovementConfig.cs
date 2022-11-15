@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Asteroids.Move.Data
+namespace Asteroids.Data
 {
     [CreateAssetMenu(fileName = "MovementConfig", menuName = "Asteroids/Data/MovementConfig")]
     public class MovementConfig : ScriptableObject

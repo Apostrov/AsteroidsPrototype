@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Asteroids.Player
 {
-    public class PlayerView : MonoBehaviour, IMovable
+    public class PlayerMover : MonoBehaviour, IMovable
     {
         private Vector2 _moveVector;
 
