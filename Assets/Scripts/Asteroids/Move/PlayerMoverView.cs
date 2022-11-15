@@ -13,7 +13,7 @@ namespace Asteroids.Player
 
         private void Update()
         {
-            ToMove.Translate(_moveVector * Time.deltaTime, Space.Self);
+            ToMove.Translate(_moveVector * Time.deltaTime, Space.World);
             ToRotate.Rotate(_rotationEuler * Time.deltaTime, Space.Self);
         }
 
@@ -25,6 +25,11 @@ namespace Asteroids.Player
         public void SetRotation(Vector3 rotationEuler)
         {
             _rotationEuler = rotationEuler;
+        }
+
+        public Quaternion GetRotation()
+        {
+            return ToRotate.rotation;
         }
     }
 }

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: MovementConfig
   m_EditorClassIdentifier: 
   AccelerationGrowSpeed: 0.15
-  Breaking: 3.5
-  MaxSpeed: 5
+  BreakForce: 1
+  MaxSpeed: 3
   MaxAcceleration: 2
-  AngularSpeed: 90
+  AngularSpeed: 360

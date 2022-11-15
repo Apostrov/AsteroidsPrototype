@@ -20,7 +20,7 @@ namespace Asteroids
 
         private void Awake()
         {
-            var inputEventListener = new MovePlayerInputListener(MovementConfig, new IInputMovable[] { PlayerMover });
+            var inputEventListener = new MovePlayerInputListener(MovementConfig, PlayerMover);
             InputBinder.SubscribeToMoveVectorChange(inputEventListener.UpdateMoveInput);
             
             _toUpdate.Add(inputEventListener);
