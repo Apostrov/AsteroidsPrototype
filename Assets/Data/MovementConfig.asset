@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AccelerationGrowSpeed: 0.2
   BreakForce: 1
-  MaxSpeed: 3
+  MaxSpeed: 4
   MaxAcceleration: 2
   InertialLerp: 0.05
   AngularSpeed: 360

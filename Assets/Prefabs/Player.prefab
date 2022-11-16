@@ -108,6 +108,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9135057246147499123}
   - component: {fileID: 5904438505543676442}
+  - component: {fileID: 8218021225303763643}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -145,6 +146,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ToMove: {fileID: 9135057246147499123}
   ToRotate: {fileID: 9135057246147499123}
+--- !u!114 &8218021225303763643
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9135057246147499122}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a6a66bf29214490b4d3d360c37b3f73, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _renderer: {fileID: 9135057245613634587}
+  _idle: {fileID: 733922601, guid: b968535ebd3ce244a81676dede18d02c, type: 3}
+  _fly: {fileID: -989897535, guid: b968535ebd3ce244a81676dede18d02c, type: 3}
 --- !u!1 &9135057246281900086
 GameObject:
   m_ObjectHideFlags: 0

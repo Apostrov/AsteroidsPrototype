@@ -1,7 +1,6 @@
-using Asteroids.PlayerMove;
 using UnityEngine;
 
-namespace Asteroids.Player
+namespace Asteroids.Player.Move
 {
     public class PlayerMoverView : MonoBehaviour, IInputMovable
     {

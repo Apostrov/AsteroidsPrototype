@@ -1,7 +1,7 @@
 ﻿using Asteroids.UpdateLoop;
 using UnityEngine;
 
-namespace Asteroids.PlayerMove
+namespace Asteroids.Player.Move
 {
     public class MovePlayerInputListener : IUpdate
     {

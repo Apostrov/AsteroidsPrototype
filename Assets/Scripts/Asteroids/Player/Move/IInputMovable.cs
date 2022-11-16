@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Asteroids.PlayerMove
+namespace Asteroids.Player.Move
 {
     public interface IInputMovable
     {
