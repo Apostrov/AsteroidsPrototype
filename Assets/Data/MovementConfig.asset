@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93edd942bb8a4cf280877a425d1a8148, type: 3}
   m_Name: MovementConfig
   m_EditorClassIdentifier: 
-  AccelerationGrowSpeed: 0.15
+  AccelerationGrowSpeed: 0.2
   BreakForce: 1
   MaxSpeed: 3
   MaxAcceleration: 2
+  InertialLerp: 0.05
   AngularSpeed: 360

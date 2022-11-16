@@ -12,7 +12,8 @@ namespace Asteroids.Move
         private float _currentSpeed;
         private float _currentAcceleration;
         
-        private Quaternion _lastRotation;
+        private Quaternion _lastAcceleratedRotation;
+        private Vector3 _lastMoveVector;
 
         public MovePlayerInputListener(Data.MovementConfig movementConfig, IInputMovable player)
         {
@@ -58,9 +59,12 @@ namespace Asteroids.Move
             var moveVector = new Vector3(0f, speed, 0f);
             if (!isBreaking)
             {
-                _lastRotation = _player.GetRotation();
+                _lastAcceleratedRotation = _player.GetRotation();
             }
-            _player.SetMoveVector(_lastRotation * moveVector);
+            
+            moveVector = Vector3.Lerp(_lastMoveVector, _lastAcceleratedRotation * moveVector, _movementConfig.InertialLerp); 
+            _player.SetMoveVector(moveVector);
+            _lastMoveVector = moveVector;
         }
     }
 }
