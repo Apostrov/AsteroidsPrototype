@@ -1,4 +1,4 @@
-using Asteroids.Move;
+using Asteroids.PlayerMove;
 using UnityEngine;
 
 namespace Asteroids.Player

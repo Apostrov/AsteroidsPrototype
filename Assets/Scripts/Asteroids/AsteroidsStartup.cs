@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Asteroids.Data;
 using Asteroids.Input;
-using Asteroids.Move;
+using Asteroids.PlayerMove;
 using Asteroids.Player;
 using Asteroids.UpdateLoop;
 using UnityEngine;
