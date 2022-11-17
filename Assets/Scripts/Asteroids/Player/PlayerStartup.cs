@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Asteroids.Input;
+using Asteroids.ObjectsLimitedLifetime;
 using Asteroids.Player.Animation;
 using Asteroids.Player.Data;
 using Asteroids.Player.Move;
@@ -58,8 +59,12 @@ namespace Asteroids.Player
         private void CreateShooting(IInputMovable playerMovable)
         {
             var bulletPool = new BulletsPool(BulletPrefab);
-            var fireInputListener = new FireInputListener(bulletPool.GetPool(), playerMovable, PlayerConfig);
-            InputBinder.SubscribeToFirePress(fireInputListener.GetFlySignal);
+            var lifeTimeChecker = new MortalLifeTimeChecker(0.12f);
+            var bulletSpawner = new BulletSpawner(PlayerConfig, bulletPool.GetPool(), playerMovable, lifeTimeChecker);
+            var fireInputListener = new FireInputListener(bulletSpawner);
+            InputBinder.SubscribeToFirePress(fireInputListener.GetFireSignal);
+            
+            _toUpdate.Add(lifeTimeChecker);
         }
     }
 }

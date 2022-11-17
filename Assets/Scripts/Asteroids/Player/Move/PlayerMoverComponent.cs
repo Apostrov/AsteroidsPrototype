@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Asteroids.Player.Move
 {
-    public class PlayerMoverView : MonoBehaviour, IInputMovable
+    public class PlayerMoverComponent : MonoBehaviour, IInputMovable
     {
         [SerializeField] private Transform ToMove;
         [SerializeField] private Transform ToRotate;

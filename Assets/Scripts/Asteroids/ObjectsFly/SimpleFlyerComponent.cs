@@ -2,7 +2,7 @@
 
 namespace Asteroids.ObjectsFly
 {
-    public class SimpleFlyerView : MonoBehaviour, IFly
+    public class SimpleFlyerComponent : MonoBehaviour, IFly
     {
         [SerializeField] private Transform ToFly;
 

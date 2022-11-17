@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using Asteroids.ObjectsLimitedLifetime;
+using Asteroids.Player.Data;
+using UnityEngine;
 using UnityEngine.Pool;
 
 namespace Asteroids.Player.Shooting
@@ -22,6 +24,10 @@ namespace Asteroids.Player.Shooting
         GameObject CreatePooledItem()
         {
             var bullet = Object.Instantiate(_bulletPrefab, Vector3.zero, Quaternion.identity);
+            if (bullet.TryGetComponent(out IMortal mortalBullet))
+            {
+                mortalBullet.SetDestroyAction(() => _pool.Release(bullet));
+            }
             return bullet;
         }
 
