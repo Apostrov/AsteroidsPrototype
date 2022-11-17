@@ -251,9 +251,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0f4091c2b7740699898be9cdead48e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PlayerConfig: {fileID: 11400000, guid: a7b27515a2bfae9499c6830d603cb4dd, type: 2}
   PlayerPrefab: {fileID: 9135057246147499122, guid: d790ece31696aea4a9d5c89f8fd922b7, type: 3}
+  BulletPrefab: {fileID: 7077613429985031773, guid: bd85db2f273866742ac365a32d9d9853, type: 3}
   InputBinder: {fileID: 1740963398}
-  MovementConfig: {fileID: 11400000, guid: a7b27515a2bfae9499c6830d603cb4dd, type: 2}
 --- !u!1 &1740963395
 GameObject:
   m_ObjectHideFlags: 0

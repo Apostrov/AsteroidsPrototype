@@ -32,6 +32,11 @@ namespace Asteroids.Player.Move
             _rotationEuler = rotationEuler;
         }
 
+        public Vector3 GetPosition()
+        {
+            return ToMove.position;
+        }
+
         public Quaternion GetRotation()
         {
             return ToRotate.rotation;

@@ -20,7 +20,7 @@
                     "id": "b0e15f72-ae84-40b3-925f-a4f889a219b1",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "",
+                    "interactions": "Press(pressPoint=1)",
                     "initialStateCheck": false
                 }
             ],
@@ -130,7 +130,7 @@
                     "path": "<Keyboard>/space",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Keyboard&Mouse",
                     "action": "Fire",
                     "isComposite": false,
                     "isPartOfComposite": false

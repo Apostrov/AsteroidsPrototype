@@ -6,6 +6,7 @@ namespace Asteroids.Player.Move
     {
         void SetMoveVector(Vector3 moveVector);
         void SetRotation(Vector3 rotationEuler);
+        Vector3 GetPosition();
         Quaternion GetRotation();
     }
 }

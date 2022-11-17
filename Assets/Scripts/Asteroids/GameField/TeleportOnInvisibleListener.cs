@@ -7,6 +7,7 @@ namespace Asteroids.GameField
     {
         [SerializeField] private GameObject Root;
         private Camera _camera;
+        private bool _quitting;
 
         public void Awake()
         {
@@ -15,7 +16,14 @@ namespace Asteroids.GameField
 
         private void OnBecameInvisible()
         {
+            if(_quitting) // fix null ref on game exit
+                return;
             TelepotBackToScreen.Teleport(_camera, Root);
+        }
+
+        private void OnApplicationQuit()
+        {
+            _quitting = true;
         }
     }
 }

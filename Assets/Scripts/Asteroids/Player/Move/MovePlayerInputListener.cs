@@ -5,7 +5,7 @@ namespace Asteroids.Player.Move
 {
     public class MovePlayerInputListener : IUpdate
     {
-        private readonly Data.MovementConfig _movementConfig;
+        private readonly Data.PlayerConfig _movementConfig;
         private readonly IInputMovable _player;
 
         private Vector2 _inputVector;
@@ -15,7 +15,7 @@ namespace Asteroids.Player.Move
         private Quaternion _lastAcceleratedRotation;
         private Vector3 _lastMoveVector;
 
-        public MovePlayerInputListener(Data.MovementConfig movementConfig, IInputMovable player)
+        public MovePlayerInputListener(Data.PlayerConfig movementConfig, IInputMovable player)
         {
             _movementConfig = movementConfig;
             _player = player;
