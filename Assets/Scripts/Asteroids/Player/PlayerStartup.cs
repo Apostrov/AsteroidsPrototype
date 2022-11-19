@@ -13,10 +13,6 @@ namespace Asteroids.Player
     public class PlayerStartup : MonoBehaviour
     {
         [SerializeField] private PlayerConfig PlayerConfig;
-        
-        [Header("Prefabs")]
-        [SerializeField] private GameObject PlayerPrefab;
-        [SerializeField] private GameObject BulletPrefab;
 
         [Header("Input and movements")]
         [SerializeField] private PlayerInputEventManager InputBinder;
@@ -38,7 +34,7 @@ namespace Asteroids.Player
 
         private void CreatePlayer()
         {
-            var player = Instantiate(PlayerPrefab, Vector3.zero, Quaternion.identity);
+            var player = Instantiate(PlayerConfig.PlayerPrefab, Vector3.zero, Quaternion.identity);
             
             if (player.TryGetComponent(out IInputMovable playerMovable))
             {
@@ -58,7 +54,7 @@ namespace Asteroids.Player
 
         private void CreateShooting(IInputMovable playerMovable)
         {
-            var bulletPool = new BulletsPool(BulletPrefab);
+            var bulletPool = new BulletsPool(PlayerConfig.BulletPrefab);
             var lifeTimeChecker = new MortalLifeTimeChecker(0.12f);
             var bulletSpawner = new BulletSpawner(PlayerConfig, bulletPool.GetPool(), playerMovable, lifeTimeChecker);
             var fireInputListener = new FireInputListener(bulletSpawner);

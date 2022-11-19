@@ -21,3 +21,5 @@ MonoBehaviour:
   BulletSpeed: 6
   BulletSpawnOffset: {x: 0, y: 0.25, z: 0}
   BulletLifeTime: 1.5
+  PlayerPrefab: {fileID: 9135057246147499122, guid: d790ece31696aea4a9d5c89f8fd922b7, type: 3}
+  BulletPrefab: {fileID: 7077613429985031773, guid: bd85db2f273866742ac365a32d9d9853, type: 3}

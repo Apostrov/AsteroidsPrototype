@@ -19,5 +19,9 @@ namespace Asteroids.Player.Data
         public float BulletSpeed = 2f;
         public Vector3 BulletSpawnOffset = new(0f, 1f, 0f);
         public float BulletLifeTime = 1f;
+        
+        [Header("Prefabs")]
+        public GameObject PlayerPrefab;
+        public GameObject BulletPrefab;
     }
 }
