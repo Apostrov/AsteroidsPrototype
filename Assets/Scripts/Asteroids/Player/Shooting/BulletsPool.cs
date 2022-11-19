@@ -1,5 +1,4 @@
 ﻿using Asteroids.ObjectsLimitedLifetime;
-using Asteroids.Player.Data;
 using UnityEngine;
 using UnityEngine.Pool;
 

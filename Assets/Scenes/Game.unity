@@ -134,6 +134,7 @@ GameObject:
   - component: {fileID: 519420032}
   - component: {fileID: 519420031}
   - component: {fileID: 519420029}
+  - component: {fileID: 519420033}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -207,6 +208,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &519420033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c49b4cc203aa6414fae5c798d1d0e7d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EventMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_MaxRayIntersections: 0
 --- !u!1 &731899774
 GameObject:
   m_ObjectHideFlags: 0
@@ -217,6 +234,7 @@ GameObject:
   m_Component:
   - component: {fileID: 731899776}
   - component: {fileID: 731899777}
+  - component: {fileID: 731899778}
   m_Layer: 0
   m_Name: Startups
   m_TagString: Untagged
@@ -255,6 +273,19 @@ MonoBehaviour:
   PlayerPrefab: {fileID: 9135057246147499122, guid: d790ece31696aea4a9d5c89f8fd922b7, type: 3}
   BulletPrefab: {fileID: 7077613429985031773, guid: bd85db2f273866742ac365a32d9d9853, type: 3}
   InputBinder: {fileID: 1740963398}
+--- !u!114 &731899778
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 731899774}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4226d5d6d2734e4d842d32daac49f762, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  EnemyConfig: {fileID: 11400000, guid: dddc2591afeec194393f1c135490ec0f, type: 2}
 --- !u!1 &1740963395
 GameObject:
   m_ObjectHideFlags: 0
