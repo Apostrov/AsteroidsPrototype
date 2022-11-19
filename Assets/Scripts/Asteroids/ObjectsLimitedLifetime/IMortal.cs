@@ -7,6 +7,6 @@ namespace Asteroids.ObjectsLimitedLifetime
         void SetDestroyAction(Action callback);
         void SetLifeTime(float lifeTime);
         bool DecreaseLifeTime(float deltaTime);
-        void DestroyObject();
+        void Kill();
     }
 }

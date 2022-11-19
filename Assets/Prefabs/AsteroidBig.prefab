@@ -1,5 +1,77 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2997297255732482695
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4888140026750615355}
+  - component: {fileID: 3319729116497727244}
+  - component: {fileID: 6780576202690401716}
+  m_Layer: 6
+  m_Name: Collider
+  m_TagString: Enemy
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4888140026750615355
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2997297255732482695}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5171491791643696224}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &3319729116497727244
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2997297255732482695}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1.25, y: 1.25}
+  m_EdgeRadius: 0
+--- !u!114 &6780576202690401716
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2997297255732482695}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c067252fe80b4f60bd2e73462a086db9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _toDestroy: {fileID: 5171491791643696239}
 --- !u!1 &5171491790935905816
 GameObject:
   m_ObjectHideFlags: 0
@@ -12,7 +84,7 @@ GameObject:
   - component: {fileID: 5171491790935905818}
   - component: {fileID: 7102317521156740755}
   m_Layer: 0
-  m_Name: asteroids_b1
+  m_Name: asteroids
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -162,6 +234,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5171491791550849742}
+  - {fileID: 4888140026750615355}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -177,8 +250,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffd4b9487f3e44a5a2954f8630126eac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _config: {fileID: 11400000, guid: dddc2591afeec194393f1c135490ec0f, type: 2}
-  _flyerComponent: {fileID: 17391642308877824}
+  Config: {fileID: 11400000, guid: dddc2591afeec194393f1c135490ec0f, type: 2}
+  Root: {fileID: 5171491791643696239}
 --- !u!114 &17391642308877824
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -204,8 +277,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b71a67acbaa48e08162fb260529e29e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _renderer: {fileID: 5171491790935905818}
-  _visual:
+  Renderer: {fileID: 5171491790935905818}
+  Visual:
   - {fileID: -693788685, guid: b968535ebd3ce244a81676dede18d02c, type: 3}
   - {fileID: -1850230407, guid: b968535ebd3ce244a81676dede18d02c, type: 3}
   - {fileID: 1776905879, guid: b968535ebd3ce244a81676dede18d02c, type: 3}

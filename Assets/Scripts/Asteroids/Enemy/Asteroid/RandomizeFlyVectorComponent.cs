@@ -6,12 +6,12 @@ namespace Asteroids.Enemy.Asteroid
 {
     public class RandomizeFlyVectorComponent: MonoBehaviour
     {
-        [SerializeField] private EnemyConfig _config;
-        [SerializeField] private SimpleFlyerComponent _flyerComponent;
+        [SerializeField] private EnemyConfig Config;
+        [SerializeField] private GameObject Root;
 
         public void Awake()
         {
-            _flyerComponent.SetFlyVector(Random.insideUnitCircle * _config.AsteroidSpeedRange.GetRandomInRange());
+            Root.GetComponent<IFly>().SetFlyVector(Random.insideUnitCircle * Config.AsteroidSpeedRange.GetRandomInRange());
         }
     }
 }

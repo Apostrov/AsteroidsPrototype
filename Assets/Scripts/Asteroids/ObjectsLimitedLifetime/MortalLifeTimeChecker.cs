@@ -40,7 +40,6 @@ namespace Asteroids.ObjectsLimitedLifetime
                 if (currentObject.DecreaseLifeTime(_checkEvery))
                 {
                     _alive.RemoveAt(i);
-                    currentObject.DestroyObject();
                 }
                 else
                 {

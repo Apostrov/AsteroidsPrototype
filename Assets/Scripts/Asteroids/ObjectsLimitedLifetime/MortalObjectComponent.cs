@@ -22,12 +22,22 @@ namespace Asteroids.ObjectsLimitedLifetime
         public bool DecreaseLifeTime(float deltaTime)
         {
             _lifeTime -= deltaTime;
-            return _lifeTime <= 0.0f;
+            if (_lifeTime <= 0.0f)
+            {
+                DestroyObject();
+                return true;
+            }
+            return false;
         }
 
-        public void DestroyObject()
+        private void DestroyObject()
         {
             OnDestroy?.Invoke();
+        }
+
+        public void Kill()
+        {
+            SetLifeTime(0f);
         }
     }
 }
