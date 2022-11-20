@@ -3,9 +3,9 @@ using Asteroids.ObjectsDestoyer;
 using Asteroids.ObjectsPool;
 using UnityEngine;
 
-namespace Asteroids.Enemy.Destoyer
+namespace Asteroids.Enemy.Asteroids
 {
-    public class EnemyDestructibleComponent : MonoBehaviour, IDestructible, IPoolable
+    public class AsteroidDestructibleComponent : MonoBehaviour, IDestructible, IPoolable
     {
         [SerializeField] private GameObject ToDestroy;
 

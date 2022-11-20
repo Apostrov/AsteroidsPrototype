@@ -17,5 +17,10 @@ namespace Asteroids.ObjectsFly
         {
             _flyVector = flyVector;
         }
+
+        public Vector3 GetPosition()
+        {
+            return ToFly.position;
+        }
     }
 }
