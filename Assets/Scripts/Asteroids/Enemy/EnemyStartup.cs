@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Asteroids.Enemy.Asteroid;
 using Asteroids.Enemy.Data;
 using Asteroids.Enemy.Spawner;
 using Asteroids.UpdateLoop;
@@ -14,9 +15,7 @@ namespace Asteroids.Enemy
 
         private void Awake()
         {
-            var asteroidSpawner = new RandomPositionSpawner(EnemyConfig.Asteroid, Camera.main);
-            
-            _toUpdate.Add(asteroidSpawner);
+            CreateAsteroidSpawner();
         }
 
         private void Update()
@@ -24,6 +23,18 @@ namespace Asteroids.Enemy
             foreach (var update in _toUpdate)
             {
                 update.Update();
+            }
+        }
+
+        private void CreateAsteroidSpawner()
+        {
+            foreach (var enemy in EnemyConfig.EnemySpawnConfigs)
+            {
+                if (enemy.Type == EnemyType.AsteroidBig)
+                {
+                    var asteroidSpawner = new AsteroidSpawner(EnemyConfig, enemy, Camera.main);
+                    _toUpdate.Add(asteroidSpawner);
+                }
             }
         }
     }

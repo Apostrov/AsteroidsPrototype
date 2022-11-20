@@ -12,10 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8af6b2a37e6a4ce5834681c063d701df, type: 3}
   m_Name: EnemyConfig
   m_EditorClassIdentifier: 
-  Asteroid:
+  EnemySpawnConfigs:
+  - Type: 0
     Prefab: {fileID: 5171491791643696239, guid: 614cffbab33e8414cadf5cbb1354c928, type: 3}
     SpawnTimeRange: {x: 2, y: 5}
-  Alien:
-    Prefab: {fileID: 0}
+    SpeedRange: {x: 1, y: 3}
+  - Type: 1
+    Prefab: {fileID: 5171491791643696239, guid: 4a5a9ae400830bc439cf4571c5ab2849, type: 3}
     SpawnTimeRange: {x: 0, y: 0}
-  AsteroidSpeedRange: {x: 1, y: 3}
+    SpeedRange: {x: 1.5, y: 3.5}
+  - Type: 2
+    Prefab: {fileID: 5171491791643696239, guid: 051cc7f83f89c31488b265e133aa6e8f, type: 3}
+    SpawnTimeRange: {x: 0, y: 0}
+    SpeedRange: {x: 2, y: 4}

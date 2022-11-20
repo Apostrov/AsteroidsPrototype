@@ -4,16 +4,16 @@ using UnityEngine;
 
 namespace Asteroids.Enemy.Spawner
 {
-    public class RandomPositionSpawner : IUpdate
+    public abstract class RandomPositionSpawner : IUpdate
     {
-        private readonly EnemySpawnConfig _config;
+        private readonly EnemySpawnConfig _spawnConfig;
         private readonly Camera _camera;
 
         private float _spawnReload;
 
-        public RandomPositionSpawner(EnemySpawnConfig config, Camera camera)
+        protected RandomPositionSpawner(EnemySpawnConfig spawnConfig, Camera camera)
         {
-            _config = config;
+            _spawnConfig = spawnConfig;
             _camera = camera;
             _spawnReload = GetSpawnReload();
         }
@@ -24,16 +24,16 @@ namespace Asteroids.Enemy.Spawner
             if (_spawnReload <= 0.0f)
             {
                 _spawnReload = GetSpawnReload();
-                Spawn();
+                TryToSpawn();
             }
         }
 
         private float GetSpawnReload()
         {
-            return _config.SpawnTimeRange.GetRandomInRange();
+            return _spawnConfig.SpawnTimeRange.GetRandomInRange();
         }
 
-        private void Spawn()
+        private void TryToSpawn()
         {
             var randomScreenPosition = new Vector3(Random.Range(0f, Screen.width), Random.Range(0f, Screen.height));
             if (Physics.Raycast(_camera.ScreenPointToRay(randomScreenPosition), out var hit))
@@ -47,7 +47,15 @@ namespace Asteroids.Enemy.Spawner
 
             var position = _camera.ScreenToWorldPoint(randomScreenPosition);
             position.z = 0f;
-            Object.Instantiate(_config.Prefab, position, Quaternion.identity);
+            Spawn(position);
         }
+
+        private void Spawn(Vector3 spawnPosition)
+        {
+            var enemy = Object.Instantiate(_spawnConfig.Prefab, spawnPosition, Quaternion.identity);
+            AfterSpawnEnemyInit(enemy, _spawnConfig);
+        }
+
+        protected abstract void AfterSpawnEnemyInit(GameObject enemy, EnemySpawnConfig spawnConfig);
     }
 }

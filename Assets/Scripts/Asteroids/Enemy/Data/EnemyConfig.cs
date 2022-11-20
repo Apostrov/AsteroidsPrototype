@@ -6,17 +6,23 @@ namespace Asteroids.Enemy.Data
     public class EnemyConfig : ScriptableObject
     {
         [Header("Spawner")]
-        public EnemySpawnConfig Asteroid;
-        public EnemySpawnConfig Alien;
-        
-        [Header("Asteroids")]
-        public Vector2 AsteroidSpeedRange;
+        public EnemySpawnConfig[] EnemySpawnConfigs;
     }
 
     [System.Serializable]
     public class EnemySpawnConfig
     {
+        public EnemyType Type;
         public GameObject Prefab;
         public Vector2 SpawnTimeRange;
+        public Vector2 SpeedRange;
+    }
+
+    public enum EnemyType
+    {
+        AsteroidBig,
+        AsteroidMedium,
+        AsteroidSmall,
+        Alien
     }
 }

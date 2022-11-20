@@ -19,6 +19,7 @@ namespace Asteroids.ObjectsLimitedLifetime
 
         public void Register(IMortal mortal)
         {
+            mortal.SetKillAction(() => OnKill(mortal));
             _alive.Add(mortal);
         }
         
@@ -46,6 +47,11 @@ namespace Asteroids.ObjectsLimitedLifetime
                     i++;
                 }
             }
+        }
+
+        private void OnKill(IMortal toKill)
+        {
+            _alive.Remove(toKill);
         }
     }
 }

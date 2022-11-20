@@ -57,7 +57,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.25, y: 1.25}
+  m_Size: {x: 0.75, y: 0.75}
   m_EdgeRadius: 0
 --- !u!114 &6780576202690401716
 MonoBehaviour:
@@ -146,7 +146,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -693788685, guid: b968535ebd3ce244a81676dede18d02c, type: 3}
+  m_Sprite: {fileID: -1455313274, guid: b968535ebd3ce244a81676dede18d02c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -214,7 +214,7 @@ GameObject:
   - component: {fileID: 17391642308877824}
   - component: {fileID: -696647481665224747}
   m_Layer: 0
-  m_Name: AsteroidBig
+  m_Name: AsteroidMedium
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -264,6 +264,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Renderer: {fileID: 5171491790935905818}
   Visual:
-  - {fileID: -693788685, guid: b968535ebd3ce244a81676dede18d02c, type: 3}
-  - {fileID: -1850230407, guid: b968535ebd3ce244a81676dede18d02c, type: 3}
-  - {fileID: 1776905879, guid: b968535ebd3ce244a81676dede18d02c, type: 3}
+  - {fileID: -1455313274, guid: b968535ebd3ce244a81676dede18d02c, type: 3}
+  - {fileID: 111143535, guid: b968535ebd3ce244a81676dede18d02c, type: 3}
+  - {fileID: -525470461, guid: b968535ebd3ce244a81676dede18d02c, type: 3}

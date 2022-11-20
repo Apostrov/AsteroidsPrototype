@@ -6,12 +6,18 @@ namespace Asteroids.ObjectsLimitedLifetime
     public class MortalObjectComponent : MonoBehaviour, IMortal
     {
         private event Action OnDestroy;
+        private event Action OnKill;
         
         private float _lifeTime;
 
         public void SetDestroyAction(Action callback)
         {
             OnDestroy += callback;
+        }
+
+        public void SetKillAction(Action callback)
+        {
+            OnKill += callback;
         }
 
         public void SetLifeTime(float lifeTime)
@@ -37,7 +43,8 @@ namespace Asteroids.ObjectsLimitedLifetime
 
         public void Kill()
         {
-            SetLifeTime(0f);
+            OnKill?.Invoke();
+            DestroyObject();
         }
     }
 }

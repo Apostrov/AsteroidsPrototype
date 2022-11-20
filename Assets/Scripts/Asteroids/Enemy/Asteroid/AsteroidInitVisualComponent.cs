@@ -2,7 +2,7 @@
 
 namespace Asteroids.Enemy.Asteroid
 {
-    public class RandomizeSpriteComponent : MonoBehaviour
+    public class AsteroidInitVisualComponent : MonoBehaviour
     {
         [SerializeField] private SpriteRenderer Renderer;
         [SerializeField] private Sprite[] Visual;
