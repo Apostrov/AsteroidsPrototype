@@ -55,7 +55,11 @@ namespace Asteroids.Player
 
             if (player.TryGetComponent(out IDestructible destructible))
             {
-                destructible.SetBeforeDestroyAction((_) => InputBinder.ClearSubscriptions());
+                destructible.SetBeforeDestroyAction((_) =>
+                {
+                    _toUpdate.Clear();
+                    InputBinder.ClearSubscriptions();
+                });
             }
         }
 
