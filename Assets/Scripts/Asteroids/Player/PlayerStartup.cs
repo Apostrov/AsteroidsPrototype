@@ -5,7 +5,7 @@ using Asteroids.Player.Animation;
 using Asteroids.Player.Data;
 using Asteroids.Player.Move;
 using Asteroids.Player.Shooting;
-using Asteroids.Pool;
+using Asteroids.ObjectsPool;
 using Asteroids.UpdateLoop;
 using UnityEngine;
 

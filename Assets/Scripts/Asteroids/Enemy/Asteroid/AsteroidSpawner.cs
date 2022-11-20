@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using Asteroids.Enemy.Data;
-using Asteroids.Enemy.Destoyer;
 using Asteroids.Enemy.Spawner;
+using Asteroids.ObjectsDestoyer;
 using Asteroids.ObjectsFly;
-using Asteroids.Pool;
+using Asteroids.ObjectsPool;
 using UnityEngine;
 using UnityEngine.Pool;
 
@@ -42,7 +42,7 @@ namespace Asteroids.Enemy.Asteroid
                 flier.SetFlyVector(Random.insideUnitCircle * spawnConfig.SpeedRange.GetRandomInRange());
             }
 
-            if (asteroid.TryGetComponentInChildren(out IEnemyDestructible destructible))
+            if (asteroid.TryGetComponentInChildren(out IDestructible destructible))
             {
                 destructible.SetBeforeDestroyAction(enemy => AsteroidSpawnOnDestroy(enemy, spawnConfig));
             }

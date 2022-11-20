@@ -1,5 +1,5 @@
 ﻿using System;
-using Asteroids.Pool;
+using Asteroids.ObjectsPool;
 using UnityEngine;
 
 namespace Asteroids.ObjectsLimitedLifetime

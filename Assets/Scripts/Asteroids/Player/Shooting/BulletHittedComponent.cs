@@ -1,4 +1,4 @@
-﻿using Asteroids.Enemy.Destoyer;
+﻿using Asteroids.ObjectsDestoyer;
 using Asteroids.ObjectsLimitedLifetime;
 using UnityEngine;
 
@@ -19,9 +19,9 @@ namespace Asteroids.Player.Shooting
         {
             if (col.CompareTag("Enemy"))
             {
-                if (col.TryGetComponent(out IEnemyDestructible destructible))
+                if (col.TryGetComponent(out IDestructible destructible))
                 {
-                    destructible.EnemyDestroy();
+                    destructible.ObjectDestroy();
                     _bullet.Kill();
                 }
             }

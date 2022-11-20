@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.Pool;
 
-namespace Asteroids.Pool
+namespace Asteroids.ObjectsPool
 {
     public class SimplePool
     {

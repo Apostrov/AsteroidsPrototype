@@ -1,11 +1,11 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Asteroids.Enemy.Destoyer
+namespace Asteroids.ObjectsDestoyer
 {
-    public interface IEnemyDestructible
+    public interface IDestructible
     {
         void SetBeforeDestroyAction(Action<GameObject> onDestroy);
-        void EnemyDestroy();
+        void ObjectDestroy();
     }
 }
