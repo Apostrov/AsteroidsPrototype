@@ -6,13 +6,15 @@ namespace Asteroids.ObjectsLimitedLifetime
 {
     public class MortalObjectComponent : MonoBehaviour, IMortal, IPoolable
     {
+        [SerializeField] private GameObject ToDestroy;
+        
         private event Action OnKill;
-        private Action _onPool;
+        private Action<GameObject>  _onPool;
         
         private float _lifeTime;
         private bool _isAlive;
 
-        public void SetPoolAction(Action callback)
+        public void SetReturnToPoolAction(Action<GameObject> callback)
         {
             _onPool = callback;
         }
@@ -45,12 +47,7 @@ namespace Asteroids.ObjectsLimitedLifetime
                 return;
             
             _isAlive = false;
-            _onPool?.Invoke();
-        }
-        
-        public void Pool()
-        {
-            DestroyObject();
+            _onPool?.Invoke(ToDestroy);
         }
 
         public void Kill()

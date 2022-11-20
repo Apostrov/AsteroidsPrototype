@@ -47,15 +47,9 @@ namespace Asteroids.Enemy.Spawner
 
             var position = _camera.ScreenToWorldPoint(randomScreenPosition);
             position.z = 0f;
-            Spawn(position);
+            Spawn(_spawnConfig, position);
         }
 
-        private void Spawn(Vector3 spawnPosition)
-        {
-            var enemy = Object.Instantiate(_spawnConfig.Prefab, spawnPosition, Quaternion.identity);
-            AfterSpawnEnemyInit(enemy, _spawnConfig);
-        }
-
-        protected abstract void AfterSpawnEnemyInit(GameObject enemy, EnemySpawnConfig spawnConfig);
+        protected abstract void Spawn(EnemySpawnConfig spawnConfig, Vector3 spawnPosition);
     }
 }

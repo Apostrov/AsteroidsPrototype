@@ -27,7 +27,9 @@ namespace Asteroids.Player.Shooting
         {
             var bullet = _bulletsPool.Get();
             var playerRotation = _player.GetRotation();
-            bullet.transform.position = _player.GetPosition() + playerRotation * _playerConfig.BulletSpawnOffset;
+            var position  = _player.GetPosition() + playerRotation * _playerConfig.BulletSpawnOffset;
+            bullet.transform.SetPositionAndRotation(position, Quaternion.identity);
+            
             if (bullet.TryGetComponent(out IFly bulletFlyer))
             {
                 bulletFlyer.SetFlyVector(playerRotation * Vector3.up * _playerConfig.BulletSpeed);

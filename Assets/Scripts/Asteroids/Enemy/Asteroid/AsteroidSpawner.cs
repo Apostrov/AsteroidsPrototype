@@ -1,22 +1,39 @@
-﻿using Asteroids.Enemy.Data;
+﻿using System.Collections.Generic;
+using Asteroids.Enemy.Data;
 using Asteroids.Enemy.Destoyer;
 using Asteroids.Enemy.Spawner;
 using Asteroids.ObjectsFly;
+using Asteroids.Pool;
 using UnityEngine;
+using UnityEngine.Pool;
 
 namespace Asteroids.Enemy.Asteroid
 {
     public class AsteroidSpawner : RandomPositionSpawner
     {
         private readonly EnemyConfig _config;
+        private readonly Dictionary<EnemyType, IObjectPool<GameObject>> _pools;
 
         public AsteroidSpawner(EnemyConfig config, EnemySpawnConfig spawnConfig, Camera camera) : base(spawnConfig,
             camera)
         {
             _config = config;
+            _pools = new Dictionary<EnemyType, IObjectPool<GameObject>>
+            {
+                [EnemyType.AsteroidBig] = CreatePool(EnemyType.AsteroidBig),
+                [EnemyType.AsteroidMedium] = CreatePool(EnemyType.AsteroidMedium),
+                [EnemyType.AsteroidSmall] = CreatePool(EnemyType.AsteroidSmall)
+            };
         }
 
-        protected override void AfterSpawnEnemyInit(GameObject asteroid, EnemySpawnConfig spawnConfig)
+        protected override void Spawn(EnemySpawnConfig spawnConfig, Vector3 spawnPosition)
+        {
+            var asteroid = _pools[spawnConfig.Type].Get();
+            asteroid.transform.SetPositionAndRotation(spawnPosition, Quaternion.identity);
+            AfterSpawnEnemyInit(asteroid, spawnConfig);
+        }
+
+        private void AfterSpawnEnemyInit(GameObject asteroid, EnemySpawnConfig spawnConfig)
         {
             asteroid.transform.rotation = GetRandomRotation();
 
@@ -27,7 +44,7 @@ namespace Asteroids.Enemy.Asteroid
 
             if (asteroid.TryGetComponentInChildren(out IEnemyDestructible destructible))
             {
-                destructible.SetOnDestroyAction(enemy => AsteroidSpawnOnDestroy(enemy, spawnConfig));
+                destructible.SetBeforeDestroyAction(enemy => AsteroidSpawnOnDestroy(enemy, spawnConfig));
             }
         }
 
@@ -42,8 +59,6 @@ namespace Asteroids.Enemy.Asteroid
             {
                 SpawnAsteroid(EnemyType.AsteroidSmall, toDestroy.transform.position);
             }
-
-            Object.Destroy(toDestroy);
         }
 
         private void SpawnAsteroid(EnemyType type, Vector3 position)
@@ -52,13 +67,30 @@ namespace Asteroids.Enemy.Asteroid
             {
                 if (enemySpawn.Type == type)
                 {
+                    var pool = _pools[enemySpawn.Type];
                     for (int i = 0; i < _config.AsteroidsOnDestroySpawnRange.GetRandomInRange(); i++)
                     {
-                        var asteroid = Object.Instantiate(enemySpawn.Prefab, position, Quaternion.identity);
+                        var asteroid = pool.Get();
+                        asteroid.transform.SetPositionAndRotation(position, Quaternion.identity);
                         AfterSpawnEnemyInit(asteroid, enemySpawn);
                     }
                 }
             }
+        }
+
+        private IObjectPool<GameObject> CreatePool(EnemyType type)
+        {
+            foreach (var enemySpawn in _config.EnemySpawnConfigs)
+            {
+                if (enemySpawn.Type == type)
+                {
+                    var pool = new SimplePool(enemySpawn.Prefab);
+                    return pool.GetPool();
+                }
+            }
+
+            Debug.LogError("EnemyConfig filled out incorrectly");
+            return null;
         }
 
         private Quaternion GetRandomRotation()

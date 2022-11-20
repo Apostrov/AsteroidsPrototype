@@ -22,9 +22,9 @@ namespace Asteroids.Pool
         GameObject CreatePooledItem()
         {
             var item = Object.Instantiate(_prefab, Vector3.zero, Quaternion.identity);
-            if (item.TryGetComponent(out IPoolable poolable))
+            if (item.TryGetComponentInChildren(out IPoolable poolable))
             {
-                poolable.SetPoolAction(() => _pool.Release(item));
+                poolable.SetReturnToPoolAction(_pool.Release);
             }
             return item;
         }

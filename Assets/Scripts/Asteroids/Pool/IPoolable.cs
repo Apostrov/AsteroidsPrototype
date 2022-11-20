@@ -1,10 +1,10 @@
 ﻿using System;
+using UnityEngine;
 
 namespace Asteroids.Pool
 {
     public interface IPoolable
     {
-        void SetPoolAction(Action callback);
-        void Pool();
+        void SetReturnToPoolAction(Action<GameObject> callback);
     }
 }
