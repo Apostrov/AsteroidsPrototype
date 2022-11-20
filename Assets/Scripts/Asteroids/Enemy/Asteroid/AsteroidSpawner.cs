@@ -42,7 +42,7 @@ namespace Asteroids.Enemy.Asteroid
             {
                 SpawnAsteroid(EnemyType.AsteroidSmall, toDestroy.transform.position);
             }
-            
+
             Object.Destroy(toDestroy);
         }
 
@@ -52,8 +52,11 @@ namespace Asteroids.Enemy.Asteroid
             {
                 if (enemySpawn.Type == type)
                 {
-                    var asteroid = Object.Instantiate(enemySpawn.Prefab, position, Quaternion.identity);
-                    AfterSpawnEnemyInit(asteroid, enemySpawn);
+                    for (int i = 0; i < _config.AsteroidsOnDestroySpawnRange.GetRandomInRange(); i++)
+                    {
+                        var asteroid = Object.Instantiate(enemySpawn.Prefab, position, Quaternion.identity);
+                        AfterSpawnEnemyInit(asteroid, enemySpawn);
+                    }
                 }
             }
         }

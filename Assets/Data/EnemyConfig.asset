@@ -25,3 +25,4 @@ MonoBehaviour:
     Prefab: {fileID: 5171491791643696239, guid: 051cc7f83f89c31488b265e133aa6e8f, type: 3}
     SpawnTimeRange: {x: 0, y: 0}
     SpeedRange: {x: 2, y: 4}
+  AsteroidsOnDestroySpawnRange: {x: 1, y: 3}

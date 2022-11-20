@@ -7,6 +7,9 @@ namespace Asteroids.Enemy.Data
     {
         [Header("Spawner")]
         public EnemySpawnConfig[] EnemySpawnConfigs;
+
+        [Header("Asteroid")]
+        public Vector2Int AsteroidsOnDestroySpawnRange;
     }
 
     [System.Serializable]

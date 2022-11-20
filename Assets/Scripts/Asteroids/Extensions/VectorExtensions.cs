@@ -8,5 +8,10 @@ namespace Asteroids
         {
             return Random.Range(range.x, range.y);
         }
+        
+        public static int GetRandomInRange(this Vector2Int range)
+        {
+            return Random.Range(range.x, range.y + 1);
+        }
     }
 }
