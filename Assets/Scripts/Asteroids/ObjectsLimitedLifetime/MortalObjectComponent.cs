@@ -9,6 +9,7 @@ namespace Asteroids.ObjectsLimitedLifetime
         private event Action OnKill;
         
         private float _lifeTime;
+        private bool _isAlive;
 
         public void SetDestroyAction(Action callback)
         {
@@ -23,6 +24,7 @@ namespace Asteroids.ObjectsLimitedLifetime
         public void SetLifeTime(float lifeTime)
         {
             _lifeTime = lifeTime;
+            _isAlive = _lifeTime > 0f;
         }
 
         public bool DecreaseLifeTime(float deltaTime)
@@ -38,6 +40,10 @@ namespace Asteroids.ObjectsLimitedLifetime
 
         private void DestroyObject()
         {
+            if(!_isAlive)
+                return;
+            
+            _isAlive = false;
             OnDestroy?.Invoke();
         }
 
