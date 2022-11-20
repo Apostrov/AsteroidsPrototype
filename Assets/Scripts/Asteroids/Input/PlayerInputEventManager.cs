@@ -28,6 +28,12 @@ namespace Asteroids.Input
             OnFire += callback;
         }
 
+        public void ClearSubscriptions()
+        {
+            MoveAction.action.performed -= MoveActionPerformed;
+            FireAction.action.performed -= FireActionPerformed;
+        }
+
         private void MoveActionPerformed(InputAction.CallbackContext context)
         {
             OnMoveVectorChange?.Invoke(context.ReadValue<Vector2>());

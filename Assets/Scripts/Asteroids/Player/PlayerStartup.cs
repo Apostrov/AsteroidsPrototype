@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Asteroids.Input;
+using Asteroids.ObjectsDestoyer;
 using Asteroids.ObjectsLimitedLifetime;
 using Asteroids.Player.Animation;
 using Asteroids.Player.Data;
@@ -50,6 +51,11 @@ namespace Asteroids.Player
             {
                 var animatePlayerInputListener = new AnimatePlayerInputListener(playerAnimation);
                 InputBinder.SubscribeToMoveVectorChange(animatePlayerInputListener.UpdateMoveInput);
+            }
+
+            if (player.TryGetComponent(out IDestructible destructible))
+            {
+                destructible.SetBeforeDestroyAction((_) => InputBinder.ClearSubscriptions());
             }
         }
 
