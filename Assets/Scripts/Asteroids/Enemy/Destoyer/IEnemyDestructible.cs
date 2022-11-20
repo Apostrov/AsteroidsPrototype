@@ -5,7 +5,7 @@ namespace Asteroids.Enemy.Destoyer
 {
     public interface IEnemyDestructible
     {
-        void OnDestroyAction(Action<GameObject> onDestroy);
+        void SetOnDestroyAction(Action<GameObject> onDestroy);
         void EnemyDestroy();
     }
 }

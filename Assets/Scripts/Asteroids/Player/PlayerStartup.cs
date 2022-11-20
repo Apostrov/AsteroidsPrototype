@@ -5,6 +5,7 @@ using Asteroids.Player.Animation;
 using Asteroids.Player.Data;
 using Asteroids.Player.Move;
 using Asteroids.Player.Shooting;
+using Asteroids.Pool;
 using Asteroids.UpdateLoop;
 using UnityEngine;
 
@@ -54,7 +55,7 @@ namespace Asteroids.Player
 
         private void CreateShooting(IInputMovable playerMovable)
         {
-            var bulletPool = new BulletsPool(PlayerConfig.BulletPrefab);
+            var bulletPool = new SimplePool(PlayerConfig.BulletPrefab);
             var lifeTimeChecker = new MortalLifeTimeChecker(0.12f);
             var bulletSpawner = new BulletSpawner(PlayerConfig, bulletPool.GetPool(), playerMovable, lifeTimeChecker);
             var fireInputListener = new FireInputListener(bulletSpawner);

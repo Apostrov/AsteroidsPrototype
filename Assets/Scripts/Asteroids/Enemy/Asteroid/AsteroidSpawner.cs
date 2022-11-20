@@ -27,7 +27,7 @@ namespace Asteroids.Enemy.Asteroid
 
             if (asteroid.TryGetComponentInChildren(out IEnemyDestructible destructible))
             {
-                destructible.OnDestroyAction(enemy => AsteroidSpawnOnDestroy(enemy, spawnConfig));
+                destructible.SetOnDestroyAction(enemy => AsteroidSpawnOnDestroy(enemy, spawnConfig));
             }
         }
 

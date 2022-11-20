@@ -7,16 +7,16 @@ namespace Asteroids.Enemy.Destoyer
     {
         [SerializeField] private GameObject ToDestroy;
         
-        private event Action<GameObject> OnDestroy;
+        private Action<GameObject> _onDestroy;
         
-        public void OnDestroyAction(Action<GameObject> onDestroy)
+        public void SetOnDestroyAction(Action<GameObject> onDestroy)
         {
-            OnDestroy += onDestroy;
+            _onDestroy = onDestroy;
         }
         
         public void EnemyDestroy()
         {
-            OnDestroy?.Invoke(ToDestroy);
+            _onDestroy?.Invoke(ToDestroy);
         }
     }
 }

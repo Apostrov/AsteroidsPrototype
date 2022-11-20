@@ -1,22 +1,23 @@
 ﻿using System;
+using Asteroids.Pool;
 using UnityEngine;
 
 namespace Asteroids.ObjectsLimitedLifetime
 {
-    public class MortalObjectComponent : MonoBehaviour, IMortal
+    public class MortalObjectComponent : MonoBehaviour, IMortal, IPoolable
     {
-        private event Action OnDestroy;
         private event Action OnKill;
+        private Action _onPool;
         
         private float _lifeTime;
         private bool _isAlive;
 
-        public void SetDestroyAction(Action callback)
+        public void SetPoolAction(Action callback)
         {
-            OnDestroy += callback;
+            _onPool = callback;
         }
 
-        public void SetKillAction(Action callback)
+        public void AddKillAction(Action callback)
         {
             OnKill += callback;
         }
@@ -44,7 +45,12 @@ namespace Asteroids.ObjectsLimitedLifetime
                 return;
             
             _isAlive = false;
-            OnDestroy?.Invoke();
+            _onPool?.Invoke();
+        }
+        
+        public void Pool()
+        {
+            DestroyObject();
         }
 
         public void Kill()

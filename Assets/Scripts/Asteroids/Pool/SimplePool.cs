@@ -1,17 +1,16 @@
-﻿using Asteroids.ObjectsLimitedLifetime;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Pool;
 
-namespace Asteroids.Player.Shooting
+namespace Asteroids.Pool
 {
-    public class BulletsPool
+    public class SimplePool
     {
-        private readonly GameObject _bulletPrefab;
+        private readonly GameObject _prefab;
         private readonly IObjectPool<GameObject> _pool;
 
-        public BulletsPool(GameObject bulletPrefab)
+        public SimplePool(GameObject prefab)
         {
-            _bulletPrefab = bulletPrefab;
+            _prefab = prefab;
             _pool = new ObjectPool<GameObject>(CreatePooledItem, OnTakeFromPool, OnReturnedToPool, OnDestroyPoolObject);
         }
         
@@ -22,12 +21,12 @@ namespace Asteroids.Player.Shooting
         
         GameObject CreatePooledItem()
         {
-            var bullet = Object.Instantiate(_bulletPrefab, Vector3.zero, Quaternion.identity);
-            if (bullet.TryGetComponent(out IMortal mortalBullet))
+            var item = Object.Instantiate(_prefab, Vector3.zero, Quaternion.identity);
+            if (item.TryGetComponent(out IPoolable poolable))
             {
-                mortalBullet.SetDestroyAction(() => _pool.Release(bullet));
+                poolable.SetPoolAction(() => _pool.Release(item));
             }
-            return bullet;
+            return item;
         }
 
         // Called when an item is returned to the pool using Release
