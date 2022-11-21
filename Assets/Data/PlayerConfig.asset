@@ -18,8 +18,12 @@ MonoBehaviour:
   MaxAcceleration: 2
   InertialLerp: 0.05
   AngularSpeed: 360
+  ProjectileSpawnOffset: {x: 0, y: 0.25, z: 0}
   BulletSpeed: 6
-  BulletSpawnOffset: {x: 0, y: 0.25, z: 0}
   BulletLifeTime: 1.5
+  LaserShowTime: 0.07
+  LaserReload: 1
+  LaserAmmo: 3
   PlayerPrefab: {fileID: 9135057246147499122, guid: d790ece31696aea4a9d5c89f8fd922b7, type: 3}
   BulletPrefab: {fileID: 7077613429985031773, guid: bd85db2f273866742ac365a32d9d9853, type: 3}
+  LaserPrefab: {fileID: 5158268847389077891, guid: 8189e64bfe85d1e48a1d3d946811a3ad, type: 3}

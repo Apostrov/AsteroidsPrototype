@@ -31,7 +31,7 @@ namespace Asteroids.Player
                 {
                     var visitorUpdater = new PlayerStatsUpdater(StatsUI);
                     var player = CreatePlayer(visitorUpdater);
-                    CreateShooting(player, visitorUpdater);
+                    CreateWeapons(player, visitorUpdater);
                     StateMachine.AddGameplayUpdate(visitorUpdater);
                 }
 
@@ -49,10 +49,10 @@ namespace Asteroids.Player
             if (player.TryGetComponent(out IInputMovable playerMovable))
             {
                 var movePlayerInputListener = new MovePlayerInputListener(PlayerConfig, playerMovable);
-                
+
                 InputBinder.AddOnMoveListener(movePlayerInputListener.UpdateMoveInput);
                 StateMachine.AddGameplayUpdate(movePlayerInputListener);
-                
+
                 visitorUpdate.AddAccepter(movePlayerInputListener);
             }
 
@@ -70,23 +70,30 @@ namespace Asteroids.Player
             return player;
         }
 
-        private void CreateShooting(GameObject player, IPlayerStatsVisitorUpdate visitorUpdate)
+        private void CreateWeapons(GameObject player, IPlayerStatsVisitorUpdate visitorUpdate)
         {
             if (player.TryGetComponent(out IInputMovable playerMovable))
             {
-                var lifeTimeChecker = new MortalLifeTimeChecker(0.12f);
-                var bulletSpawner = new BulletSpawner(PlayerConfig, playerMovable, lifeTimeChecker);
-
-                InputBinder.AddOnFireListener(bulletSpawner.Spawn);
-                StateMachine.AddGameplayUpdate(lifeTimeChecker);
-
-                if (player.TryGetComponent(out LaserVisualComponent laserVisual))
-                {
-                    var laser = new LaserShooter(PlayerConfig, playerMovable, laserVisual);
-                    InputBinder.AddOnLaserListener(laser.Shoot);
-                    visitorUpdate.AddAccepter(laser);
-                }
+                CreateBulletSpawner(playerMovable);
+                CreateLaserSpawner(playerMovable, visitorUpdate);
             }
+        }
+
+        private void CreateBulletSpawner(IInputMovable player)
+        {
+            var bulletLifeTimeChecker = new MortalLifeTimeChecker(0.1f);
+            var bulletSpawner = new BulletSpawner(PlayerConfig, player, bulletLifeTimeChecker);
+            InputBinder.AddOnFireListener(bulletSpawner.Spawn);
+            StateMachine.AddGameplayUpdate(bulletLifeTimeChecker);
+        }
+
+        private void CreateLaserSpawner(IInputMovable player, IPlayerStatsVisitorUpdate visitorUpdate)
+        {
+            var laserLifeTimeChecker = new MortalLifeTimeChecker(0.02f);
+            var laser = new LaserSpawner(PlayerConfig, player, laserLifeTimeChecker);
+            InputBinder.AddOnLaserListener(laser.Spawn);
+            StateMachine.AddGameplayUpdate(laserLifeTimeChecker);
+            visitorUpdate.AddAccepter(laser);
         }
     }
 }

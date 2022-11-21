@@ -16,16 +16,20 @@ namespace Asteroids.Player.Data
         public float AngularSpeed = 90f;
 
         [Header("Shooting")]
+        public Vector3 ProjectileSpawnOffset = new(0f, 1f, 0f);
+        
+        [Header("Bullet")]
         public float BulletSpeed = 2f;
-        public Vector3 BulletSpawnOffset = new(0f, 1f, 0f);
         public float BulletLifeTime = 1f;
 
         [Header("Laser")]
         public float LaserShowTime = 0.07f;
         public float LaserReload = 1f;
+        public int LaserAmmo = 3;
         
         [Header("Prefabs")]
         public GameObject PlayerPrefab;
         public GameObject BulletPrefab;
+        public GameObject LaserPrefab;
     }
 }

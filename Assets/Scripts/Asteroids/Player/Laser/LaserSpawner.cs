@@ -1,43 +1,57 @@
 ﻿using Asteroids.ObjectsDestoyer;
+using Asteroids.ObjectsLimitedLifetime;
+using Asteroids.ObjectsPool;
 using Asteroids.Player.Data;
 using Asteroids.Player.Move;
 using Asteroids.Player.Stats;
 using UnityEngine;
+using UnityEngine.Pool;
 
 namespace Asteroids.Player.Laser
 {
-    public class LaserShooter : IPlayerStatsAccepter
+    public class LaserSpawner : IPlayerStatsAccepter
     {
+        private readonly IObjectPool<GameObject> _laserPool;
         private readonly IInputMovable _player;
         private readonly PlayerConfig _playerConfig;
-        private readonly LaserVisualComponent _laser;
+        private readonly ILifeTimeChecker _lifeTimeChecker;
 
         private readonly RaycastHit2D[] _hitted = new RaycastHit2D[50];
 
         private float _lastShootTime;
 
-        public LaserShooter(PlayerConfig playerConfig, IInputMovable player, LaserVisualComponent laser)
+        public LaserSpawner(PlayerConfig playerConfig, IInputMovable player, ILifeTimeChecker lifeTimeChecker)
         {
             _player = player;
             _playerConfig = playerConfig;
-            _laser = laser;
             _lastShootTime = Time.time;
+            _laserPool = new SimplePool(playerConfig.LaserPrefab).GetPool();
+            _lifeTimeChecker = lifeTimeChecker;
         }
 
-        public void Shoot()
+        public void Spawn()
         {
             if (Time.time - _lastShootTime < _playerConfig.LaserReload)
                 return;
 
             _lastShootTime = Time.time;
-
+            
+            var laser = _laserPool.Get();
             var playerRotation = _player.GetRotation();
-            var shootDirection = playerRotation * Vector3.up;
-            _laser.SetShootPoint(shootDirection * 100f, _playerConfig.LaserShowTime);
-            HitNDestroy(_player.GetPosition(), shootDirection);
+            var playerPosition = _player.GetPosition();
+            var spawnPosition = playerPosition + playerRotation * _playerConfig.ProjectileSpawnOffset;
+            laser.transform.SetPositionAndRotation(spawnPosition, playerRotation);
+
+            if (laser.TryGetComponent(out IMortal mortal))
+            {
+                mortal.SetLifeTime(_playerConfig.LaserShowTime);
+                _lifeTimeChecker.Register(mortal);
+            }
+            
+            LaserHitAndDestroy(playerPosition, playerRotation * Vector3.up);
         }
 
-        private void HitNDestroy(Vector2 from, Vector2 direction)
+        private void LaserHitAndDestroy(Vector2 from, Vector2 direction)
         {
             var hitted = Physics2D.RaycastNonAlloc(from, direction, _hitted, 100f, 1 << LayerMask.NameToLayer("Enemy"));
             for (int i = 0; i < hitted; i++)
