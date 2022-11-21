@@ -6,6 +6,7 @@ using Asteroids.Player.Data;
 using Asteroids.Player.Move;
 using Asteroids.Player.Shooting;
 using Asteroids.ObjectsPool;
+using Asteroids.Player.Laser;
 using Asteroids.StateMachine;
 using UnityEngine;
 
@@ -25,7 +26,8 @@ namespace Asteroids.Player
             {
                 if (state == State.GameStart)
                 {
-                    CreatePlayer();
+                    var player = CreatePlayer();
+                    CreateShooting(player);
                 }
 
                 if (state == State.GameEnd)
@@ -35,7 +37,7 @@ namespace Asteroids.Player
             });
         }
 
-        private void CreatePlayer()
+        private GameObject CreatePlayer()
         {
             var player = Instantiate(PlayerConfig.PlayerPrefab, Vector3.zero, Quaternion.identity);
 
@@ -44,8 +46,6 @@ namespace Asteroids.Player
                 var movePlayerInputListener = new MovePlayerInputListener(PlayerConfig, playerMovable);
                 InputBinder.AddOnMoveListener(movePlayerInputListener.UpdateMoveInput);
                 StateMachine.AddGameplayUpdate(movePlayerInputListener);
-
-                CreateShooting(playerMovable);
             }
 
             if (player.TryGetComponent(out IPlayerAnimation playerAnimation))
@@ -58,15 +58,26 @@ namespace Asteroids.Player
             {
                 destructible.SetOnDestroyListener((_) => { StateMachine.ChangeState(State.GameEnd); });
             }
+
+            return player;
         }
 
-        private void CreateShooting(IInputMovable playerMovable)
+        private void CreateShooting(GameObject player)
         {
-            var lifeTimeChecker = new MortalLifeTimeChecker(0.12f);
-            var bulletSpawner = new BulletSpawner(PlayerConfig, playerMovable, lifeTimeChecker);
+            if (player.TryGetComponent(out IInputMovable playerMovable))
+            {
+                var lifeTimeChecker = new MortalLifeTimeChecker(0.12f);
+                var bulletSpawner = new BulletSpawner(PlayerConfig, playerMovable, lifeTimeChecker);
 
-            InputBinder.AddOnFireListener(bulletSpawner.Spawn);
-            StateMachine.AddGameplayUpdate(lifeTimeChecker);
+                InputBinder.AddOnFireListener(bulletSpawner.Spawn);
+                StateMachine.AddGameplayUpdate(lifeTimeChecker);
+
+                if (player.TryGetComponent(out LaserVisualComponent laserVisual))
+                {
+                    var laser = new LaserShooter(PlayerConfig, playerMovable, laserVisual);
+                    InputBinder.AddOnLaserListener(laser.Shoot);
+                }
+            }
         }
     }
 }

@@ -1286,6 +1286,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FireAction: {fileID: -5640662884588702923, guid: 60381a00db0cc474c982f693f03daf7c, type: 3}
   MoveAction: {fileID: -4575196185446272349, guid: 60381a00db0cc474c982f693f03daf7c, type: 3}
+  LaserAction: {fileID: -6523462774837945591, guid: 60381a00db0cc474c982f693f03daf7c, type: 3}
 --- !u!1 &1753450342
 GameObject:
   m_ObjectHideFlags: 0
