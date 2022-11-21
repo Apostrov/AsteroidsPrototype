@@ -27,7 +27,7 @@ namespace Asteroids.ObjectsLimitedLifetime
         public void SetLifeTime(float lifeTime)
         {
             _lifeTime = lifeTime;
-            _isAlive = _lifeTime > 0f;
+            _isAlive = true;
         }
 
         public bool DecreaseLifeTime(float deltaTime)

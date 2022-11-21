@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
 using Asteroids.Enemy.Data;
 using Asteroids.ObjectsFly;
-using Asteroids.UpdateLoop;
+using Asteroids.StateMachine;
 using UnityEngine;
 
 namespace Asteroids.Enemy.MoveToTarget
 {
-    public class ToTargetMover : IUpdate, IMover
+    public class ToTargetMover : IGameplayUpdate, IMover
     {
         private readonly float _moveSpeed;
         private readonly List<IFly> _targetable;

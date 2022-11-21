@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
-using Asteroids.UpdateLoop;
+using Asteroids.StateMachine;
 using UnityEngine;
 
 namespace Asteroids.ObjectsLimitedLifetime
 {
-    public class MortalLifeTimeChecker : IUpdate, ILifeTimeChecker
+    public class MortalLifeTimeChecker : IGameplayUpdate, ILifeTimeChecker
     {
         private readonly List<IMortal> _alive = new();
         private readonly float _checkEvery;

@@ -1,9 +1,9 @@
-﻿using Asteroids.UpdateLoop;
+﻿using Asteroids.StateMachine;
 using UnityEngine;
 
 namespace Asteroids.Player.Move
 {
-    public class MovePlayerInputListener : IUpdate
+    public class MovePlayerInputListener : IGameplayUpdate
     {
         private readonly Data.PlayerConfig _movementConfig;
         private readonly IInputMovable _player;

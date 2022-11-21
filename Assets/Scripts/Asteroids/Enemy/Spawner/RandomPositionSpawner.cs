@@ -1,10 +1,10 @@
 ﻿using Asteroids.Enemy.Data;
-using Asteroids.UpdateLoop;
+using Asteroids.StateMachine;
 using UnityEngine;
 
 namespace Asteroids.Enemy.Spawner
 {
-    public abstract class RandomPositionSpawner : IUpdate
+    public abstract class RandomPositionSpawner : IGameplayUpdate
     {
         private readonly EnemySpawnConfig _spawnConfig;
         private readonly Camera _camera;

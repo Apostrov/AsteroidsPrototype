@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Asteroids.Input;
+﻿using Asteroids.Input;
 using Asteroids.ObjectsDestoyer;
 using Asteroids.ObjectsLimitedLifetime;
 using Asteroids.Player.Animation;
@@ -7,7 +6,7 @@ using Asteroids.Player.Data;
 using Asteroids.Player.Move;
 using Asteroids.Player.Shooting;
 using Asteroids.ObjectsPool;
-using Asteroids.UpdateLoop;
+using Asteroids.StateMachine;
 using UnityEngine;
 
 namespace Asteroids.Player
@@ -15,34 +14,36 @@ namespace Asteroids.Player
     public class PlayerStartup : MonoBehaviour
     {
         [SerializeField] private PlayerConfig PlayerConfig;
+        [SerializeField] private SimpleStateMachine StateMachine;
 
         [Header("Input and movements")]
         [SerializeField] private PlayerInputEventManager InputBinder;
 
-        private readonly List<IUpdate> _toUpdate = new();
-
         private void Awake()
         {
-            CreatePlayer();
-        }
-
-        private void Update()
-        {
-            foreach (var update in _toUpdate)
+            StateMachine.AddOnStateEnterListener(state =>
             {
-                update.Update();
-            }
+                if (state == State.GameStart)
+                {
+                    CreatePlayer();
+                }
+
+                if (state == State.GameEnd)
+                {
+                    InputBinder.ClearSubscriptions();
+                }
+            });
         }
 
         private void CreatePlayer()
         {
             var player = Instantiate(PlayerConfig.PlayerPrefab, Vector3.zero, Quaternion.identity);
-            
+
             if (player.TryGetComponent(out IInputMovable playerMovable))
             {
                 var movePlayerInputListener = new MovePlayerInputListener(PlayerConfig, playerMovable);
                 InputBinder.SubscribeToMoveVectorChange(movePlayerInputListener.UpdateMoveInput);
-                _toUpdate.Add(movePlayerInputListener);
+                StateMachine.AddGameplayUpdate(movePlayerInputListener);
 
                 CreateShooting(playerMovable);
             }
@@ -55,11 +56,7 @@ namespace Asteroids.Player
 
             if (player.TryGetComponent(out IDestructible destructible))
             {
-                destructible.SetBeforeDestroyAction((_) =>
-                {
-                    _toUpdate.Clear();
-                    InputBinder.ClearSubscriptions();
-                });
+                destructible.SetBeforeDestroyAction((_) => { StateMachine.ChangeState(State.GameEnd); });
             }
         }
 
@@ -69,9 +66,9 @@ namespace Asteroids.Player
             var lifeTimeChecker = new MortalLifeTimeChecker(0.12f);
             var bulletSpawner = new BulletSpawner(PlayerConfig, bulletPool.GetPool(), playerMovable, lifeTimeChecker);
             var fireInputListener = new FireInputListener(bulletSpawner);
+
             InputBinder.SubscribeToFirePress(fireInputListener.GetFireSignal);
-            
-            _toUpdate.Add(lifeTimeChecker);
+            StateMachine.AddGameplayUpdate(lifeTimeChecker);
         }
     }
 }
