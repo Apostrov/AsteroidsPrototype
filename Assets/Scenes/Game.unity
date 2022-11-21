@@ -289,6 +289,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EnemyConfig: {fileID: 11400000, guid: dddc2591afeec194393f1c135490ec0f, type: 2}
   StateMachine: {fileID: 731899779}
+  GameOverUI: {fileID: 2016077825453465008}
 --- !u!114 &731899779
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -714,6 +715,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 219e31d53191a224db567437b5160f8b, type: 3}
+--- !u!114 &2016077825453465008 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1138814994006206886, guid: 219e31d53191a224db567437b5160f8b, type: 3}
+  m_PrefabInstance: {fileID: 2016077825453465007}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1190813372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33882fb2476446cea03b571b4fb95968, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &3042413402274628411
 PrefabInstance:
   m_ObjectHideFlags: 0

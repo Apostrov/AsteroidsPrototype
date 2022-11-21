@@ -1,4 +1,5 @@
-﻿using Asteroids.Enemy.Data;
+﻿using Asteroid.Points;
+using Asteroids.Enemy.Data;
 using Asteroids.Enemy.MoveToTarget;
 using Asteroids.Enemy.Spawner;
 using Asteroids.ObjectsDestoyer;
@@ -11,7 +12,7 @@ namespace Asteroids.Enemy.Alien
     {
         private readonly IMover _mover;
 
-        public AlienSpawner(IMover mover, EnemySpawnConfig spawnConfig, Camera camera) : base(spawnConfig, camera)
+        public AlienSpawner(IMover mover, EnemySpawnConfig spawnConfig, Camera camera, IPointsCounter counter) : base(spawnConfig, camera, counter)
         {
             _mover = mover;
         }
@@ -26,9 +27,15 @@ namespace Asteroids.Enemy.Alien
 
                 if (alien.TryGetComponentInChildren(out IDestructible destructible))
                 {
-                    destructible.SetOnDestroyListener((_) => _mover.RemoveMovable(flier));
+                    destructible.SetOnDestroyListener((_) =>
+                    {
+                        _mover.RemoveMovable(flier);
+                        PointsCounter.AddPoints(spawnConfig.PointsForKill);
+                    });
                 }
             }
         }
+
+        
     }
 }

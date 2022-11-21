@@ -19,6 +19,7 @@ namespace Asteroids.Enemy.Data
         public GameObject Prefab;
         public Vector2 SpawnTimeRange;
         public Vector2 SpeedRange;
+        public int PointsForKill;
     }
 
     public enum EnemyType

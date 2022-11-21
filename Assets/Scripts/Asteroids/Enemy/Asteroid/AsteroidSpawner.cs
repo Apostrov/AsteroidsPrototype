@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Asteroid.Points;
 using Asteroids.Enemy.Data;
 using Asteroids.Enemy.Spawner;
 using Asteroids.ObjectsDestoyer;
@@ -14,8 +15,8 @@ namespace Asteroids.Enemy.Asteroid
         private readonly EnemyConfig _config;
         private readonly Dictionary<EnemyType, IObjectPool<GameObject>> _pools;
 
-        public AsteroidSpawner(EnemyConfig config, EnemySpawnConfig spawnConfig, Camera camera) : base(spawnConfig,
-            camera)
+        public AsteroidSpawner(EnemyConfig config, EnemySpawnConfig spawnConfig, Camera camera, IPointsCounter counter) :
+            base(spawnConfig, camera, counter)
         {
             _config = config;
             _pools = new Dictionary<EnemyType, IObjectPool<GameObject>>
@@ -44,7 +45,11 @@ namespace Asteroids.Enemy.Asteroid
 
             if (asteroid.TryGetComponentInChildren(out IDestructible destructible))
             {
-                destructible.SetOnDestroyListener(enemy => AsteroidSpawnOnDestroy(enemy, spawnConfig));
+                destructible.SetOnDestroyListener(enemy =>
+                {
+                    AsteroidSpawnOnDestroy(enemy, spawnConfig);
+                    PointsCounter.AddPoints(spawnConfig.PointsForKill);
+                });
             }
         }
 

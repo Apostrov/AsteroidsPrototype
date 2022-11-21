@@ -1,4 +1,5 @@
-﻿using Asteroids.Enemy.Data;
+﻿using Asteroid.Points;
+using Asteroids.Enemy.Data;
 using Asteroids.StateMachine;
 using UnityEngine;
 
@@ -8,14 +9,16 @@ namespace Asteroids.Enemy.Spawner
     {
         private readonly EnemySpawnConfig _spawnConfig;
         private readonly Camera _camera;
+        protected readonly IPointsCounter PointsCounter;
 
         private float _spawnReload;
 
-        protected RandomPositionSpawner(EnemySpawnConfig spawnConfig, Camera camera)
+        protected RandomPositionSpawner(EnemySpawnConfig spawnConfig, Camera camera, IPointsCounter counter)
         {
             _spawnConfig = spawnConfig;
             _camera = camera;
             _spawnReload = GetSpawnReload();
+            PointsCounter = counter;
         }
 
         public void Update()

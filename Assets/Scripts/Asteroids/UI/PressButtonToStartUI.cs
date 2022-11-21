@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 namespace Asteroids.UI
 {
-    public class PressButtonToStart : MonoBehaviour
+    public class PressButtonToStartUI : MonoBehaviour
     {
         [SerializeField] private SimpleStateMachine StateMachine;
         [SerializeField] private Button StartButton;
