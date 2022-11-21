@@ -1,11 +1,12 @@
 ﻿using Asteroids.ObjectsDestoyer;
 using Asteroids.Player.Data;
 using Asteroids.Player.Move;
+using Asteroids.Player.Stats;
 using UnityEngine;
 
 namespace Asteroids.Player.Laser
 {
-    public class LaserShooter
+    public class LaserShooter : IPlayerStatsAccepter
     {
         private readonly IInputMovable _player;
         private readonly PlayerConfig _playerConfig;
@@ -47,6 +48,11 @@ namespace Asteroids.Player.Laser
                     destructible.ObjectDestroy();
                 }
             }
+        }
+
+        public void Accept(IPlayerStatsVisitor playerStatsVisitor)
+        {
+            playerStatsVisitor.UpdateLaserInfo((Time.time - _lastShootTime) / _playerConfig.LaserReload);
         }
     }
 }

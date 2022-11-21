@@ -9,12 +9,6 @@ namespace Asteroids.Player.Move
 
         private Vector3 _moveVector;
         private Vector3 _rotationEuler;
-        private Camera _mainCamera;
-        
-        private void Start()
-        {
-            _mainCamera = Camera.main;
-        }
 
         private void Update()
         {

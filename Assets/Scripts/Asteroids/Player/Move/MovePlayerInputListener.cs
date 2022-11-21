@@ -1,9 +1,10 @@
-﻿using Asteroids.StateMachine;
+﻿using Asteroids.Player.Stats;
+using Asteroids.StateMachine;
 using UnityEngine;
 
 namespace Asteroids.Player.Move
 {
-    public class MovePlayerInputListener : IGameplayUpdate
+    public class MovePlayerInputListener : IGameplayUpdate, IPlayerStatsAccepter
     {
         private readonly Data.PlayerConfig _movementConfig;
         private readonly IInputMovable _player;
@@ -65,6 +66,12 @@ namespace Asteroids.Player.Move
             moveVector = Vector3.Lerp(_lastMoveVector, _lastAcceleratedRotation * moveVector, _movementConfig.InertialLerp); 
             _player.SetMoveVector(moveVector);
             _lastMoveVector = moveVector;
+        }
+
+        public void Accept(IPlayerStatsVisitor playerStatsVisitor)
+        {
+            playerStatsVisitor.UpdatePlayerMoveInfo(_player);
+            playerStatsVisitor.UpdatePlayerSpeed(_currentSpeed);
         }
     }
 }

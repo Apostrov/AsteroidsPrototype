@@ -5,8 +5,8 @@ using Asteroids.Player.Animation;
 using Asteroids.Player.Data;
 using Asteroids.Player.Move;
 using Asteroids.Player.Shooting;
-using Asteroids.ObjectsPool;
 using Asteroids.Player.Laser;
+using Asteroids.Player.Stats;
 using Asteroids.StateMachine;
 using UnityEngine;
 
@@ -20,14 +20,19 @@ namespace Asteroids.Player
         [Header("Input and movements")]
         [SerializeField] private PlayerInputEventManager InputBinder;
 
+        [Header("UI")]
+        [SerializeField] private PlayerStatsUI StatsUI;
+
         private void Awake()
         {
             StateMachine.AddOnStateEnterListener(state =>
             {
                 if (state == State.GameStart)
                 {
-                    var player = CreatePlayer();
-                    CreateShooting(player);
+                    var visitorUpdater = new PlayerStatsUpdater(StatsUI);
+                    var player = CreatePlayer(visitorUpdater);
+                    CreateShooting(player, visitorUpdater);
+                    StateMachine.AddGameplayUpdate(visitorUpdater);
                 }
 
                 if (state == State.GameEnd)
@@ -37,15 +42,18 @@ namespace Asteroids.Player
             });
         }
 
-        private GameObject CreatePlayer()
+        private GameObject CreatePlayer(IPlayerStatsVisitorUpdate visitorUpdate)
         {
             var player = Instantiate(PlayerConfig.PlayerPrefab, Vector3.zero, Quaternion.identity);
 
             if (player.TryGetComponent(out IInputMovable playerMovable))
             {
                 var movePlayerInputListener = new MovePlayerInputListener(PlayerConfig, playerMovable);
+                
                 InputBinder.AddOnMoveListener(movePlayerInputListener.UpdateMoveInput);
                 StateMachine.AddGameplayUpdate(movePlayerInputListener);
+                
+                visitorUpdate.AddAccepter(movePlayerInputListener);
             }
 
             if (player.TryGetComponent(out IPlayerAnimation playerAnimation))
@@ -62,7 +70,7 @@ namespace Asteroids.Player
             return player;
         }
 
-        private void CreateShooting(GameObject player)
+        private void CreateShooting(GameObject player, IPlayerStatsVisitorUpdate visitorUpdate)
         {
             if (player.TryGetComponent(out IInputMovable playerMovable))
             {
@@ -76,6 +84,7 @@ namespace Asteroids.Player
                 {
                     var laser = new LaserShooter(PlayerConfig, playerMovable, laserVisual);
                     InputBinder.AddOnLaserListener(laser.Shoot);
+                    visitorUpdate.AddAccepter(laser);
                 }
             }
         }
