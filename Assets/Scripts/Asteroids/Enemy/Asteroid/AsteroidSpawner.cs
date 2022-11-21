@@ -44,7 +44,7 @@ namespace Asteroids.Enemy.Asteroid
 
             if (asteroid.TryGetComponentInChildren(out IDestructible destructible))
             {
-                destructible.SetBeforeDestroyAction(enemy => AsteroidSpawnOnDestroy(enemy, spawnConfig));
+                destructible.SetOnDestroyListener(enemy => AsteroidSpawnOnDestroy(enemy, spawnConfig));
             }
         }
 

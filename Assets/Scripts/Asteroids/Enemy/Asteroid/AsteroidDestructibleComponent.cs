@@ -12,7 +12,7 @@ namespace Asteroids.Enemy.Asteroids
         private Action<GameObject> _beforeDestroy;
         private Action<GameObject> _onPool;
 
-        public void SetBeforeDestroyAction(Action<GameObject> onDestroy)
+        public void SetOnDestroyListener(Action<GameObject> onDestroy)
         {
             _beforeDestroy = onDestroy;
         }
@@ -23,7 +23,7 @@ namespace Asteroids.Enemy.Asteroids
             _onPool?.Invoke(ToDestroy);
         }
 
-        public void SetReturnToPoolAction(Action<GameObject> callback)
+        public void SetOnReturnToPoolListener(Action<GameObject> callback)
         {
             _onPool = callback;
         }

@@ -9,7 +9,7 @@ namespace Asteroids.Input
         [SerializeField] private InputActionReference FireAction;
         [SerializeField] private InputActionReference MoveAction;
 
-        private event Action<Vector2> OnMoveVectorChange;
+        private event Action<Vector2> OnMove;
         private event Action OnFire;
 
         private void Awake()
@@ -18,12 +18,12 @@ namespace Asteroids.Input
             FireAction.action.performed += FireActionPerformed;
         }
 
-        public void SubscribeToMoveVectorChange(Action<Vector2> callback)
+        public void AddOnMoveListener(Action<Vector2> callback)
         {
-            OnMoveVectorChange += callback;
+            OnMove += callback;
         }
 
-        public void SubscribeToFirePress(Action callback)
+        public void AddOnFireListener(Action callback)
         {
             OnFire += callback;
         }
@@ -36,7 +36,7 @@ namespace Asteroids.Input
 
         private void MoveActionPerformed(InputAction.CallbackContext context)
         {
-            OnMoveVectorChange?.Invoke(context.ReadValue<Vector2>());
+            OnMove?.Invoke(context.ReadValue<Vector2>());
         }
 
         private void FireActionPerformed(InputAction.CallbackContext context)

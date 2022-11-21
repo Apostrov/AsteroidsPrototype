@@ -24,7 +24,7 @@ namespace Asteroids.ObjectsPool
             var item = Object.Instantiate(_prefab, Vector3.zero, Quaternion.identity);
             if (item.TryGetComponentInChildren(out IPoolable poolable))
             {
-                poolable.SetReturnToPoolAction(_pool.Release);
+                poolable.SetOnReturnToPoolListener(_pool.Release);
             }
             return item;
         }

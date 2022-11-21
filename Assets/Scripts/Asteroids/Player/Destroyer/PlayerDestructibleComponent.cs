@@ -9,7 +9,7 @@ namespace Asteroids.Player.Destroyer
         [SerializeField] private GameObject ToDestroy;
         private Action<GameObject> _onDestroy;
 
-        public void SetBeforeDestroyAction(Action<GameObject> onDestroy)
+        public void SetOnDestroyListener(Action<GameObject> onDestroy)
         {
             _onDestroy = onDestroy;
         }

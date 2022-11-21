@@ -1,5 +1,6 @@
 ﻿using Asteroids.ObjectsFly;
 using Asteroids.ObjectsLimitedLifetime;
+using Asteroids.ObjectsPool;
 using Asteroids.Player.Data;
 using Asteroids.Player.Move;
 using UnityEngine;
@@ -14,10 +15,9 @@ namespace Asteroids.Player.Shooting
         private readonly PlayerConfig _playerConfig;
         private readonly ILifeTimeChecker _lifeTimeChecker;
 
-        public BulletSpawner(PlayerConfig playerConfig, IObjectPool<GameObject> bulletPool, IInputMovable player,
-            ILifeTimeChecker lifeTimeChecker)
+        public BulletSpawner(PlayerConfig playerConfig, IInputMovable player, ILifeTimeChecker lifeTimeChecker)
         {
-            _bulletsPool = bulletPool;
+            _bulletsPool = new SimplePool(playerConfig.BulletPrefab).GetPool();
             _player = player;
             _playerConfig = playerConfig;
             _lifeTimeChecker = lifeTimeChecker;
@@ -27,9 +27,9 @@ namespace Asteroids.Player.Shooting
         {
             var bullet = _bulletsPool.Get();
             var playerRotation = _player.GetRotation();
-            var position  = _player.GetPosition() + playerRotation * _playerConfig.BulletSpawnOffset;
+            var position = _player.GetPosition() + playerRotation * _playerConfig.BulletSpawnOffset;
             bullet.transform.SetPositionAndRotation(position, Quaternion.identity);
-            
+
             if (bullet.TryGetComponent(out IFly bulletFlyer))
             {
                 bulletFlyer.SetFlyVector(playerRotation * Vector3.up * _playerConfig.BulletSpeed);

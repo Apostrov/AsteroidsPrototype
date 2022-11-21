@@ -26,7 +26,7 @@ namespace Asteroids.Enemy.Alien
 
                 if (alien.TryGetComponentInChildren(out IDestructible destructible))
                 {
-                    destructible.SetBeforeDestroyAction((_) => _mover.RemoveMovable(flier));
+                    destructible.SetOnDestroyListener((_) => _mover.RemoveMovable(flier));
                 }
             }
         }

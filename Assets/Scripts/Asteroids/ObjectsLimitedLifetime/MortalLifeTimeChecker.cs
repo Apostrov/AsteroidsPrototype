@@ -19,7 +19,7 @@ namespace Asteroids.ObjectsLimitedLifetime
 
         public void Register(IMortal mortal)
         {
-            mortal.AddKillAction(() => OnKill(mortal));
+            mortal.AddOnKillListener(() => OnKill(mortal));
             _alive.Add(mortal);
         }
         

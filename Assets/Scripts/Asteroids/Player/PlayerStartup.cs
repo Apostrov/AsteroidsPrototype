@@ -42,7 +42,7 @@ namespace Asteroids.Player
             if (player.TryGetComponent(out IInputMovable playerMovable))
             {
                 var movePlayerInputListener = new MovePlayerInputListener(PlayerConfig, playerMovable);
-                InputBinder.SubscribeToMoveVectorChange(movePlayerInputListener.UpdateMoveInput);
+                InputBinder.AddOnMoveListener(movePlayerInputListener.UpdateMoveInput);
                 StateMachine.AddGameplayUpdate(movePlayerInputListener);
 
                 CreateShooting(playerMovable);
@@ -50,24 +50,22 @@ namespace Asteroids.Player
 
             if (player.TryGetComponent(out IPlayerAnimation playerAnimation))
             {
-                var animatePlayerInputListener = new AnimatePlayerInputListener(playerAnimation);
-                InputBinder.SubscribeToMoveVectorChange(animatePlayerInputListener.UpdateMoveInput);
+                var animatePlayerInputListener = new AnimatePlayerInputListener(playerAnimation, StateMachine);
+                InputBinder.AddOnMoveListener(animatePlayerInputListener.UpdateMoveInput);
             }
 
             if (player.TryGetComponent(out IDestructible destructible))
             {
-                destructible.SetBeforeDestroyAction((_) => { StateMachine.ChangeState(State.GameEnd); });
+                destructible.SetOnDestroyListener((_) => { StateMachine.ChangeState(State.GameEnd); });
             }
         }
 
         private void CreateShooting(IInputMovable playerMovable)
         {
-            var bulletPool = new SimplePool(PlayerConfig.BulletPrefab);
             var lifeTimeChecker = new MortalLifeTimeChecker(0.12f);
-            var bulletSpawner = new BulletSpawner(PlayerConfig, bulletPool.GetPool(), playerMovable, lifeTimeChecker);
-            var fireInputListener = new FireInputListener(bulletSpawner);
+            var bulletSpawner = new BulletSpawner(PlayerConfig, playerMovable, lifeTimeChecker);
 
-            InputBinder.SubscribeToFirePress(fireInputListener.GetFireSignal);
+            InputBinder.AddOnFireListener(bulletSpawner.Spawn);
             StateMachine.AddGameplayUpdate(lifeTimeChecker);
         }
     }

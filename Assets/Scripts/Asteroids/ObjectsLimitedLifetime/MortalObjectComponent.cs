@@ -14,12 +14,12 @@ namespace Asteroids.ObjectsLimitedLifetime
         private float _lifeTime;
         private bool _isAlive;
 
-        public void SetReturnToPoolAction(Action<GameObject> callback)
+        public void SetOnReturnToPoolListener(Action<GameObject> callback)
         {
             _onPool = callback;
         }
 
-        public void AddKillAction(Action callback)
+        public void AddOnKillListener(Action callback)
         {
             OnKill += callback;
         }

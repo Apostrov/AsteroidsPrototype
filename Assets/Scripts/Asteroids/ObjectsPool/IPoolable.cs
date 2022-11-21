@@ -5,6 +5,6 @@ namespace Asteroids.ObjectsPool
 {
     public interface IPoolable
     {
-        void SetReturnToPoolAction(Action<GameObject> callback);
+        void SetOnReturnToPoolListener(Action<GameObject> callback);
     }
 }
