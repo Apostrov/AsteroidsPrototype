@@ -14,13 +14,13 @@ namespace Asteroids.Player.Stats
 
         public void UpdatePlayerMoveInfo(IInputMovable player)
         {
-            _position.text = $"Position: {player.GetPosition()}";
-            _rotation.text = $"Rotation: {player.GetRotation().eulerAngles}";
+            _position.text = $"Position: {(Vector2)player.GetPosition()}";
+            _rotation.text = $"Rotation: {player.GetRotation().eulerAngles.z:0}";
         }
 
         public void UpdatePlayerSpeed(float speed)
         {
-            _speed.text = $"Speed: {speed}";
+            _speed.text = $"Speed: {speed:0.00}";
         }
 
         public void UpdateLaserInfo(float reloadPercent)
