@@ -22,6 +22,7 @@ namespace Asteroids.Player.Data
 
         [Header("Laser")]
         public float LaserShowTime = 0.07f;
+        public float LaserReload = 1f;
         
         [Header("Prefabs")]
         public GameObject PlayerPrefab;
