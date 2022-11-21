@@ -17,14 +17,10 @@ namespace Asteroids.GameField
 
         private void OnBecameInvisible()
         {
-            if (_quitting) // fix null ref on game exit
+            if (_camera == null) // fix null ref on game exit/restart
                 return;
             TelepotBackToScreen.Teleport(_camera, Root);
         }
-
-        private void OnApplicationQuit()
-        {
-            _quitting = true;
-        }
+        
     }
 }
