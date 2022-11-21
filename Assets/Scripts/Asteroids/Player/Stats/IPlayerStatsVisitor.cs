@@ -6,6 +6,6 @@ namespace Asteroids.Player.Stats
     {
         void UpdatePlayerMoveInfo(IInputMovable player);
         void UpdatePlayerSpeed(float speed);
-        void UpdateLaserInfo(float reloadPercent);
+        void UpdateLaserInfo(float reloadPercent, int laserAmmo);
     }
 }

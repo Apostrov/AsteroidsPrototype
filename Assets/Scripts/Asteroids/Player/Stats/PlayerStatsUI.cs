@@ -11,6 +11,7 @@ namespace Asteroids.Player.Stats
         [SerializeField] private TMP_Text _rotation;
         [SerializeField] private TMP_Text _speed;
         [SerializeField] private Image _laserReload;
+        [SerializeField] private TMP_Text _laserAmmo;
 
         public void UpdatePlayerMoveInfo(IInputMovable player)
         {
@@ -23,9 +24,10 @@ namespace Asteroids.Player.Stats
             _speed.text = $"Speed: {speed:0.00}";
         }
 
-        public void UpdateLaserInfo(float reloadPercent)
+        public void UpdateLaserInfo(float reloadPercent, int laserAmmo)
         {
             _laserReload.fillAmount = reloadPercent;
+            _laserAmmo.text = laserAmmo.ToString();
         }
     }
 }

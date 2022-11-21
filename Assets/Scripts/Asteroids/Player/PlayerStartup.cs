@@ -90,10 +90,11 @@ namespace Asteroids.Player
         private void CreateLaserSpawner(IInputMovable player, IPlayerStatsVisitorUpdate visitorUpdate)
         {
             var laserLifeTimeChecker = new MortalLifeTimeChecker(0.02f);
-            var laser = new LaserSpawner(PlayerConfig, player, laserLifeTimeChecker);
-            InputBinder.AddOnLaserListener(laser.Spawn);
+            var laserSpawner = new LaserSpawner(PlayerConfig, player, laserLifeTimeChecker);
+            InputBinder.AddOnLaserListener(laserSpawner.Spawn);
             StateMachine.AddGameplayUpdate(laserLifeTimeChecker);
-            visitorUpdate.AddAccepter(laser);
+            StateMachine.AddGameplayUpdate(laserSpawner);
+            visitorUpdate.AddAccepter(laserSpawner);
         }
     }
 }
