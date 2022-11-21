@@ -29,15 +29,27 @@ namespace Asteroids.Player
             {
                 if (state == State.GameStart)
                 {
-                    var visitorUpdater = new PlayerStatsUpdater(StatsUI);
-                    var player = CreatePlayer(visitorUpdater);
-                    CreateWeapons(player, visitorUpdater);
-                    StateMachine.AddGameplayUpdate(visitorUpdater);
+                    OnGameStartStateEnter();
                 }
 
                 if (state == State.GameEnd)
                 {
                     InputBinder.ClearSubscriptions();
+                }
+            });
+        }
+
+        private void OnGameStartStateEnter()
+        {
+            var visitorUpdater = new PlayerStatsUpdater(StatsUI);
+            var player = CreatePlayer(visitorUpdater);
+            StateMachine.AddGameplayUpdate(visitorUpdater);
+
+            StateMachine.AddOnStateEnterListener(state =>
+            {
+                if (state == State.Gameplay)
+                {
+                    CreateWeapons(player, visitorUpdater);
                 }
             });
         }
