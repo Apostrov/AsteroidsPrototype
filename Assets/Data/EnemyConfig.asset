@@ -16,21 +16,21 @@ MonoBehaviour:
   - Type: 0
     Prefab: {fileID: 5171491791643696239, guid: 614cffbab33e8414cadf5cbb1354c928, type: 3}
     SpawnTimeRange: {x: 2, y: 5}
-    SpeedRange: {x: 1, y: 3}
+    SpeedRange: {x: 0.5, y: 2.5}
     PointsForKill: 1
   - Type: 1
     Prefab: {fileID: 5171491791643696239, guid: 4a5a9ae400830bc439cf4571c5ab2849, type: 3}
     SpawnTimeRange: {x: 0, y: 0}
-    SpeedRange: {x: 1.5, y: 3.5}
+    SpeedRange: {x: 2.5, y: 3.5}
     PointsForKill: 2
   - Type: 2
     Prefab: {fileID: 5171491791643696239, guid: 051cc7f83f89c31488b265e133aa6e8f, type: 3}
     SpawnTimeRange: {x: 0, y: 0}
-    SpeedRange: {x: 2, y: 4}
+    SpeedRange: {x: 3.5, y: 5}
     PointsForKill: 3
   - Type: 3
     Prefab: {fileID: 197663970855599595, guid: c4d16cb1dc92da248aea851b60a61e64, type: 3}
     SpawnTimeRange: {x: 2, y: 8}
     SpeedRange: {x: 1, y: 2}
     PointsForKill: 2
-  AsteroidsOnDestroySpawnRange: {x: 1, y: 3}
+  AsteroidsOnDestroySpawnRange: {x: 2, y: 3}
